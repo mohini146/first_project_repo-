@@ -1,0 +1,11 @@
+name: 'first_project'
+version: '1.0'
+config-version: 2
+
+profile: 'default'
+
+model-paths: ["models"]
+
+models:
+  first_project:
+    +materialized: view
