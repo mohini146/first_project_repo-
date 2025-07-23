@@ -11,8 +11,7 @@ renamed as (
     select
         id as employee_id,
         name,
-        department,
-        joining_date
+        department
     from source
 
 )
