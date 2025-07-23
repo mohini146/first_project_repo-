@@ -1,0 +1,8 @@
+
+version: 2
+
+sources:
+  - name: public              # schema name in Snowflake
+    database: TEST_DB         # Snowflake database name
+    tables:
+      - name: employee_data   # table name in Snowflake
