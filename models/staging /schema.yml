@@ -2,20 +2,8 @@
 version: 2
 
 sources:
-  - name: public
+  - name: public                # Schema name in Snowflake
+    database: TEST_DB          # Your Snowflake database
     schema: PUBLIC
     tables:
-      - name: customer_raw
-
-models:
-  - name: stg_customer
-    description: "Staging model for customer data"
-    columns:
-      - name: customer_id
-        description: "Unique customer ID"
-        tests:
-          - not_null
-          - unique
-      - name: customer_name
-      - name: email
-      - name: country
+      - name: employee_data
