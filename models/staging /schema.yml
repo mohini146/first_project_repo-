@@ -2,8 +2,9 @@
 version: 2
 
 sources:
-  - name: public                # Schema name in Snowflake
-    database: TEST_DB          # Your Snowflake database
+  - name: public
+    database: TEST_DB
     schema: PUBLIC
     tables:
       - name: employee_data
+      - name: customer_raw       # 👈 Add this line if using customer_raw
