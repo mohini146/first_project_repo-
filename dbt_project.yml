@@ -1,11 +1,15 @@
-name: 'first_project'
+name: 'new_first_project'        # 👈 Match this exactly throughout the file
 version: '1.0'
 config-version: 2
 
-profile: 'default'
+profile: 'default'               # 👈 Use the profile you've set up for Snowflake
 
 model-paths: ["models"]
+seed-paths: ["seeds"]
 
-models:
-  first_project:
-    +materialized: view
+seeds:
+  new_first_project:             # 👈 MUST match the project name above
+    country_codes:               # 👈 Your CSV file name (no `.csv`)
+      column_types:
+        country_code: string
+        country_name: string
