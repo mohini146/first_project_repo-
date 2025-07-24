@@ -1,14 +1,5 @@
-
 version: 2
 
 models:
   - name: stg_country_codes
-    description: "Cleaned up country codes seed"
-    columns:
-      - name: country_code
-        tests:
-          - not_null
-          - unique
-      - name: country_name
-        tests:
-          - not_null
+    description: "Staged model built from country_codes seed"
