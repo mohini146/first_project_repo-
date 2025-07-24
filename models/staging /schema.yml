@@ -1,10 +1,14 @@
 
 version: 2
 
-sources:
-  - name: public
-    database: TEST_DB
-    schema: PUBLIC
-    tables:
-      - name: employee_data
-      - name: customer_raw       # 👈 Add this line if using customer_raw
+models:
+  - name: stg_country_codes
+    description: "Cleaned up country codes seed"
+    columns:
+      - name: country_code
+        tests:
+          - not_null
+          - unique
+      - name: country_name
+        tests:
+          - not_null
