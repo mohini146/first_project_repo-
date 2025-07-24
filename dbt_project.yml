@@ -7,9 +7,3 @@ profile: 'default'          # 👈 Use your connection profile (e.g., for Snowfl
 model-paths: ["models"]
 seed-paths: ["seeds"]
 
-seeds:
-  new_first_project:        # 👈 Must match the `name:` value above
-    country_codes:
-      column_types:
-        country_code: string
-        country_name: string
