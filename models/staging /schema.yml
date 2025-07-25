@@ -1,5 +1,29 @@
 version: 2
 
+sources:
+  - name: public
+    database: TEST_DB
+    schema: PUBLIC
+    tables:
+      - name: orders_raw
+      - name: customers_raw
+
 models:
-  - name: stg_country_codes
-    description: "Staged model built from country_codes seed"
+  - name: stg_orders
+    description: "Cleaned orders data"
+    columns:
+      - name: ORDER_ID
+        tests:
+          - not_null
+          - unique
+
+      - name: STATUS
+        tests:
+          - accepted_values:
+              values: ['pending', 'shipped', 'delivered']
+
+      - name: CUSTOMER_ID
+        tests:
+          - relationships:
+              to: source('public', 'customers_raw')
+              field: ID
