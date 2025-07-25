@@ -2,28 +2,18 @@ version: 2
 
 sources:
   - name: public
-    database: TEST_DB
-    schema: PUBLIC
+    database: TEST_DB      # ← Your Snowflake DB name
+    schema: PUBLIC         # ← Your Snowflake schema
     tables:
-      - name: orders_raw
-      - name: customers_raw
+      - name: customer_raw
 
 models:
-  - name: stg_orders
-    description: "Cleaned orders data"
+  - name: stg_customer
+    description: "Staging model for customer data"
     columns:
-      - name: ORDER_ID
+      - name: customer_id
         tests:
           - not_null
           - unique
 
-      - name: STATUS
-        tests:
-          - accepted_values:
-              values: ['pending', 'shipped', 'delivered']
 
-      - name: CUSTOMER_ID
-        tests:
-          - relationships:
-              to: source('public', 'customers_raw')
-              field: ID
