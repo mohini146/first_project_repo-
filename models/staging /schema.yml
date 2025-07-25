@@ -2,18 +2,40 @@ version: 2
 
 sources:
   - name: public
-    database: TEST_DB      # ← Your Snowflake DB name
-    schema: PUBLIC         # ← Your Snowflake schema
+    database: TEST_DB
+    schema: PUBLIC
     tables:
       - name: customer_raw
+      - name: orders_raw
 
 models:
   - name: stg_customer
-    description: "Staging model for customer data"
+    description: "Staging model for customer"
     columns:
       - name: customer_id
         tests:
           - not_null
           - unique
+      - name: country
+        tests:
+          - accepted_values:
+              values: ['India', 'USA', 'UK']
+
+  - name: stg_orders
+    description: "Staging model for orders"
+    columns:
+      - name: ORDER_ID
+        tests:
+          - not_null
+          - unique
+      - name: CUSTOMER_ID
+        tests:
+          - relationships:
+              to: source('public', 'customer_raw')
+              field: ID
+      - name: STATUS
+        tests:
+          - accepted_values:
+              values: ['pending', 'shipped', 'delivered']
 
 
