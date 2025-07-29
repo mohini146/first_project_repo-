@@ -2,4 +2,4 @@ SELECT
     ID AS customer_id,
     NAME,
     COUNTRY
-FROM {{ source('public', 'customer_raw') }}
+FROM {{ source('public', 'customer_raw')}}
