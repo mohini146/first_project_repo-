@@ -1,8 +1,19 @@
 version: 2
 
 sources:
-  - name: netflix          # <-- must match your source() call
-    database: TEST_DB      # <-- your Snowflake database
-    schema: PUBLIC         # <-- your Snowflake schema
+  - name: netflix             # logical source name
+    database: TEST_DB         # Snowflake database
+    schema: RAW               # Snowflake schema where your raw tables are
     tables:
-      - name: movies     # <-- your actual raw table name
+      - name: movies          # how dbt will refer to this table
+        identifier: RAW_MOVIES # actual table name in Snowflake
+      - name: ratings
+        identifier: RAW_RATINGS
+      - name: tags
+        identifier: RAW_TAGS
+      - name: genome_tags
+        identifier: RAW_GENOME_TAGS
+      - name: genome_scores
+        identifier: RAW_GENOME_SCORES
+      - name: links
+        identifier: RAW_LINKS
