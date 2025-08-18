@@ -1,41 +1,83 @@
 version: 2
 
 sources:
-  - name: public
-    database: TEST_DB
-    schema: PUBLIC
+  - name: raw
+    database: TEST_DB       # replace with your Snowflake database
+    schema: PUBLIC          # replace with your schema
     tables:
-      - name: customer_raw
-      - name: orders_raw
+      - name: movies
+      - name: ratings
+      - name: tags
+      - name: genome_tags
+      - name: genome_scores
+      - name: links
 
 models:
-  - name: stg_customer
-    description: "Staging model for customer"
+  - name: stg_movies
+    description: "Staging model for movies data"
     columns:
-      - name: customer_id
+      - name: movie_id
+        description: "Unique movie identifier"
         tests:
           - not_null
           - unique
-      - name: country
-        tests:
-          - accepted_values:
-              values: ['India', 'USA', 'UK']
+      - name: title
+        description: "Movie title"
 
-  - name: stg_orders
-    description: "Staging model for orders"
+  - name: stg_ratings
+    description: "Staging model for ratings data"
     columns:
-      - name: ORDER_ID
+      - name: user_id
+        tests:
+          - not_null
+      - name: movie_id
+        tests:
+          - not_null
+      - name: rating
+        description: "User rating for the movie"
+
+  - name: stg_tags
+    description: "Staging model for tags"
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+      - name: movie_id
+        tests:
+          - not_null
+      - name: tag
+        description: "User-defined tag"
+
+  - name: stg_genome_tags
+    description: "Staging model for genome tags"
+    columns:
+      - name: tag_id
         tests:
           - not_null
           - unique
-      - name: CUSTOMER_ID
-        tests:
-          - relationships:
-              to: source('public', 'customer_raw')
-              field: ID
-      - name: STATUS
-        tests:
-          - accepted_values:
-              values: ['pending', 'shipped', 'delivered']
+      - name: tag
+        description: "Tag description"
 
+  - name: stg_genome_scores
+    description: "Staging model for genome scores"
+    columns:
+      - name: movie_id
+        tests:
+          - not_null
+      - name: tag_id
+        tests:
+          - not_null
+      - name: relevance
+        description: "Relevance score of the tag for the movie"
 
+  - name: stg_links
+    description: "Staging model for external links"
+    columns:
+      - name: movie_id
+        tests:
+          - not_null
+          - unique
+      - name: imdb_id
+        description: "IMDB identifier"
+      - name: tmdb_id
+        description: "TMDB identifier"
