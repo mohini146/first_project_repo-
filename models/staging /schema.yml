@@ -1,22 +1,8 @@
 version: 2
 
 sources:
-  - name: raw
-    database: TEST_DB       # replace with your Snowflake database
-    schema: PUBLIC          # replace with your schema
+  - name: netflix          # <-- must match your source() call
+    database: TEST_DB      # <-- your Snowflake database
+    schema: PUBLIC         # <-- your Snowflake schema
     tables:
-      - name: movies
-
-
-models:
-  - name: stg_movies
-    description: "Staging model for movies data"
-    columns:
-      - name: movie_id
-        description: "Unique movie identifier"
-        tests:
-          - not_null
-          - unique
-      - name: title
-        description: "Movie title"
-
+      - name: movies     # <-- your actual raw table name
