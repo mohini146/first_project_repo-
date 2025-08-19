@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: netflix          # 👈 must match the name you use in source()
+    schema: public         # or RAW or whatever schema you loaded data into
+    database: TEST_DB      # optional if same as profile
+    tables:
+      - name: movies
+      - name: ratings
+      - name: tags
+      - name: genome_scores
+      - name: links
+      - name: genome_tags
