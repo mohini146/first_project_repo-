@@ -1,11 +1,9 @@
-{{ config(materialized = 'table') }}
+{{ config(materialized='table') }}
 
-WITH raw_tags AS (
-  SELECT * FROM tags
-)  
-SELECT
-  userId AS user_id,
-  movieId AS movie_id,
-  tag,
-  TO_TIMESTAMP_LTZ(timestamp) AS tag_timestamp
-FROM raw_tags
+select
+    tagId as tag_id,
+    movieId as movie_id,
+    tag,
+    userId as user_id,
+    timestamp
+from {{ source('netflix', 'tags') }}
